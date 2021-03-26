@@ -47,7 +47,10 @@ exports.saveRequestRelief = (reqest, response) => {
     district: reqest.body.district,
     email: reqest.body.email,
     typeOfCalamity: reqest.body.typeOfCalamity,
+    shortDesc: reqest.body.shortDesc,
     requirement: reqest.body.requirement,
+    currentRelief: reqest.body.currentRelief,
+    createdDate: reqest.body.createdDate,
     severity: reqest.body.severity,
     phoneNumber: reqest.body.phoneNumber,
     expectedDelivery: reqest.body.expectedDelivery,
@@ -66,4 +69,31 @@ exports.saveRequestRelief = (reqest, response) => {
       message: 'Relief Request Raised Successfully!',
     });
   });
+};
+
+exports.getAllReliefRequests = (request, response) => {
+  RequestRelief.find({}, function (err, reliefRequestList) {
+    if (err) {
+      response.status(500).send({ message: err });
+    }
+    response.status(200).send(reliefRequestList);
+  });
+};
+
+exports.updateRequestStatus = (request, response) => {
+  const requestId = request.params.id;
+  const updatedStatus = request.params.status;
+  const userMappedId = request.params.mappedId;
+
+  RequestRelief.findByIdAndUpdate(
+    { _id: requestId },
+    { $set: { status: updatedStatus, userIdMapped: userMappedId } },
+    { new: true },
+    function (err, updatedObject) {
+      if (err) {
+        response.status(500).send({ message: err });
+      }
+      response.status(200).send(updatedObject);
+    }
+  );
 };

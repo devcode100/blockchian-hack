@@ -23,4 +23,36 @@ export class ReliefRequestService {
       }
     );
   }
+
+  getAllReliefRequests() {
+    return this._httpClient.get(
+      "http://localhost:8080/api/all/relief-requests",
+      {
+        headers: new HttpHeaders({
+          "x-access-token": this._authService.getToken(),
+        }),
+      }
+    );
+  }
+
+  updateReliefStatus(
+    _requestId: string,
+    newStatus: string,
+    mappedUserId: string
+  ) {
+    return this._httpClient.put(
+      "http://localhost:8080/api/update/relief-requests-status/" +
+        _requestId +
+        "/" +
+        newStatus +
+        "/" +
+        mappedUserId,
+      null,
+      {
+        headers: new HttpHeaders({
+          "x-access-token": this._authService.getToken(),
+        }),
+      }
+    );
+  }
 }

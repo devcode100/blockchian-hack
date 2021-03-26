@@ -1,8 +1,7 @@
-import { UserInfo } from "./../modal/userInfo";
 import { SignIn } from "./../modal/SignIn";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
                 }
               }
             });
-
+          this.router.navigate(["/view-relief-request"]);
           this._snackBar.open("Login successful.", "Close", {
             duration: 2000,
           });

@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   isUserRolerRegistered: boolean;
 
   constructor(
+    private _loadEthService: LoadEthService,
     public authService: AuthService,
     private router: Router,
     private _snackBar: MatSnackBar

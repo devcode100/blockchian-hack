@@ -29,10 +29,13 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { SignupComponent } from "./signup/signup.component";
 import { NgoComponent } from "./ngo/ngo.component";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { NgoConfirmComponent } from "./modal-dialog/ngo-confirm/ngo-confirm.component";
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { UserConfirmComponent } from './modal-dialog/user-confirm/user-confirm.component';
-import { RequestReliefComponent } from './request-relief/request-relief.component';
+import { UserRegistrationComponent } from "./user-registration/user-registration.component";
+import { UserConfirmComponent } from "./modal-dialog/user-confirm/user-confirm.component";
+import { RequestReliefComponent } from "./request-relief/request-relief.component";
+import { ViewReliefRequestsComponent } from "./view-relief-requests/view-relief-requests.component";
+import { RaiseHelpComponent } from './modal-dialog/raise-help/raise-help.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { RequestReliefComponent } from './request-relief/request-relief.componen
     UserRegistrationComponent,
     UserConfirmComponent,
     RequestReliefComponent,
+    ViewReliefRequestsComponent,
+    RaiseHelpComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +75,7 @@ import { RequestReliefComponent } from './request-relief/request-relief.componen
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -55,11 +55,30 @@
       <mat-form-field class="full-width-input">
         <input
           matInput
-          placeholder="Requirement"
-          formControlName="requirement"
+          maxlength="100"
+          placeholder="Short Description"
+          formControlName="shortDesc"
           required
         />
-        <mat-error> Requirement is mandatory </mat-error>
+        <mat-error> Short Description is mandatory </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Current Relief Name</mat-label>
+        <mat-select formControlName="currentRelief">
+          <mat-option
+            *ngFor="let currentRelief of currentReliefList"
+            [value]="currentRelief"
+          >
+            {{ currentRelief }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            requestReliefForm.get('currentRelief').hasError('currentRelief')
+          "
+        >
+          Current Relief Field is mandatory
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Severity</mat-label>
@@ -74,16 +93,21 @@
           Severity Field is mandatory
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="full-width-input">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Expected Delivery Date</mat-label>
         <input
           matInput
-          placeholder="Expected Delivery"
+          [matDatepicker]="picker"
           formControlName="expectedDelivery"
           required
         />
-        <mat-error> Please provide a expectedDelivery Date </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error> Please provide a valid ExpectedDelivery Date </mat-error>
       </mat-form-field>
-      <mat-form-field class="full-width-input" [hidden]="!validateUserMapped()">
+
+      <mat-form-field class="full-width-input" [hidden]="validateUserMapped()">
         <input
           matInput
           placeholder="user Id Mapped"

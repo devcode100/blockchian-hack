@@ -1,17 +1,17 @@
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { LoadEthService } from "./load-eth.service";
-const userMasterContractAddress = "0x00638E5DA335A78A46B4818e0352a0ED60D75381";
+const userMasterContractAddress = "0x0451E8362cA0CdaB3a9Fd728d0219C23a3d7E8b9";
 const userMasterContractABI = require("../deployed-smart-contract/UserMaster.json");
 //-------------------
-const ngoRegContractAddress = "0x5128C7188Ca4936BB09D881567d1EBE5EcbCA798";
+const ngoRegContractAddress = "0x56F9876682A2609165537b8697d1cf0dDf4dAbCb";
 const ngoRegContractABI = require("../deployed-smart-contract/NgoRegistration.json");
 //-------------------
-const userRegContractAddress = "0x550A9D621F0e9d5E15bAA14ACcbb1603f79450dd";
+const userRegContractAddress = "0x990f8C788B25D3e622bEEdc63A59B07738104Ea2";
 const userRegContractABI = require("../deployed-smart-contract/UserRegistration.json");
 //-------------------
 const reliefRequestContractAddress =
-  "0x42e80eadC50cC88Ef55154448f55BB591e315143";
+  "0xca1475cC4c3eB7F915657386F50793dF8F50c4Fe";
 const reliefRequestContractABI = require("../deployed-smart-contract/ReliefRequest.json");
 //-------------------
 let userMasterInstance = undefined;
@@ -133,6 +133,20 @@ export class Web3Service {
   ) {
     return reliefRequestInstance.methods
       .saveReliefRequest(_requestId, _userId, _userMappedId, _status)
+      .send({ from: etherAccount[0] });
+  }
+
+  checkIsRequestValid(_requestId: string) {
+    return reliefRequestInstance.methods.checkIsRequestValid(_requestId).call();
+  }
+
+  updateStatusAndMappedUser(
+    _requestId: string,
+    _newStatus: string,
+    _mappedUserId: string
+  ) {
+    return reliefRequestInstance.methods
+      .updateStatusAndMappedUser(_requestId, _newStatus, _mappedUserId)
       .send({ from: etherAccount[0] });
   }
 }

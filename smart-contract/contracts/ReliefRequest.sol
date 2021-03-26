@@ -30,4 +30,27 @@ contract ReliefRequest {
     function getReliefRequestCount() public view returns (uint256) {
         return reliefRequestIds.length;
     }
+
+    function checkIsRequestValid(string memory _requestId)
+        public
+        view
+        returns (bool)
+    {
+        string memory userId = reliefRequestMasterList[_requestId].userId;
+
+        if (bytes(userId).length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function updateStatusAndMappedUser(
+        string memory _id,
+        string memory status,
+        string memory mapepdUserId
+    ) public {
+        reliefRequestMasterList[_id].userMappedId = mapepdUserId;
+        reliefRequestMasterList[_id].status = status;
+    }
 }

@@ -33,4 +33,16 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.saveRequestRelief
   );
+
+  app.get(
+    '/api/all/relief-requests',
+    [authJwt.verifyToken],
+    controller.getAllReliefRequests
+  );
+
+  app.put(
+    '/api/update/relief-requests-status/:id/:status/:mappedId',
+    [authJwt.verifyToken],
+    controller.updateRequestStatus
+  );
 };

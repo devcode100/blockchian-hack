@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Raise Helping Hand</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    My Confirm you are agreeing to hep with th relief material as mentioned in
+    the request
+  </p></mat-dialog-content
+>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="closeDialog(false)">
+    Cancel
+  </button>
+  <button mat-button [mat-dialog-close]="true" (click)="closeDialog(true)">
+    Confirm
+  </button>
+</mat-dialog-actions>

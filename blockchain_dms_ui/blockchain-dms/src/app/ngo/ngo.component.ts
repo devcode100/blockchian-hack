@@ -51,7 +51,7 @@ export class NgoComponent implements OnInit {
             .then(
               (completed) => {
                 this.authService.isNGORegistered.next(true);
-                this.router.navigate(["/"]);
+                this.router.navigate(["/view-relief-request"]);
                 this._snackBar.open(
                   "NGO Registration is  successful.",
                   "Close",

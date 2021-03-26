@@ -1,0 +1,215 @@
+<mat-accordion
+  *ngIf="reliefRequestList && reliefRequestList.length > 0"
+  class="block-headers-align"
+  [displayMode]="'default'"
+  [multi]="true"
+  #accordion="matAccordion"
+>
+  <mat-expansion-panel
+    (opened)="beforePanelOpened(reliefRequest)"
+    *ngFor="let reliefRequest of reliefRequestList"
+    hideToggle
+    #mapanel="matExpansionPanel"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>{{ reliefRequest.currentRelief }}</strong>
+      </mat-panel-title>
+      <mat-panel-description>
+        <p>Requested Date: {{ reliefRequest.createdDate }}</p>
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Short Description:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.shortDesc }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>State:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.state }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>District:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.district }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>User Id:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.userId }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Email:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.email }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Type Of Calamity:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.typeOfCalamity }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Requirement:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.requirement }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Severity:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.severity }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Phone Number:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.phoneNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Expected Delivery Date:</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.expectedDelivery }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Request Mapped To:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.userIdMapped }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="some-page-wrapper">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Status:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.status }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div
+      class="some-page-wrapper"
+      *ngIf="
+        reliefRequest.userId != loggedInUserId &&
+        reliefRequest.status == 'INITIATED'
+      "
+    >
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="raiseHepDialog(reliefRequest)"
+            >
+              <mat-icon>clean_hands</mat-icon> Raise hand for Help
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-action-row>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="checkIfValid(reliefRequest._id)"
+      >
+        Check the Validity of Request
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div
+  class="vertical-align"
+  *ngIf="!reliefRequestList || reliefRequestList.length == 0"
+>
+  <p>There are no relief requests in the system.</p>
+  <p>
+    <button mat-raised-button color="accent" routerLink="/relief-request">
+      Navigate to Create relief request
+    </button>
+  </p>
+</div>
