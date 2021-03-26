@@ -1,3 +1,4 @@
+import { RequestReliefComponent } from "./request-relief/request-relief.component";
 import { UserRegistrationComponent } from "./user-registration/user-registration.component";
 import { NgoComponent } from "./ngo/ngo.component";
 import { SignupComponent } from "./signup/signup.component";
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: "user-registration",
     component: UserRegistrationComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "relief-request",
+    component: RequestReliefComponent,
     canActivate: [AuthGuardService],
   },
 ];

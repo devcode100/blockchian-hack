@@ -7,6 +7,7 @@ db.mongoose = mongoose;
 
 db.user = require('./user.model');
 db.role = require('./role.model');
+db.requestrelief  = require('./requestrelief.model');
 
 db.ROLES = ['USER', 'TRANSPORT_AGENCY', 'NGO', 'LAW'];
 

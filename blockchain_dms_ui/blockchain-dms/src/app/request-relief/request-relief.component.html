@@ -1,1 +1,110 @@
-<p>request-relief works!</p>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="requestReliefForm" (ngSubmit)="saveReliefRequest()">
+      <h2>Relief Request Form</h2>
+
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="State" formControlName="state" required />
+        <mat-error> Please provide a valid State </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="District"
+          formControlName="district"
+          required
+        />
+        <mat-error> Please provide a valid District </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Email Address"
+          formControlName="email"
+          required
+        />
+        <mat-error> Please provide a valid Email Address </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Requirement"
+          formControlName="requirement"
+          required
+        />
+        <mat-error> Requirement is mandatory </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+          required
+        />
+        <mat-error> phoneNumber is mandatory </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Type of Calamity"
+          formControlName="typeOfCalamity"
+          required
+        />
+        <mat-error> Type Of calamity is mandatory </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Requirement"
+          formControlName="requirement"
+          required
+        />
+        <mat-error> Requirement is mandatory </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Severity</mat-label>
+        <mat-select formControlName="severity">
+          <mat-option *ngFor="let severity of severityList" [value]="severity">
+            {{ severity }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="requestReliefForm.get('severity').hasError('required')"
+        >
+          Severity Field is mandatory
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Expected Delivery"
+          formControlName="expectedDelivery"
+          required
+        />
+        <mat-error> Please provide a expectedDelivery Date </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input" [hidden]="!validateUserMapped()">
+        <input
+          matInput
+          placeholder="user Id Mapped"
+          formControlName="userIdMapped"
+          required
+        />
+        <mat-error> Please provide a valid userIdMapped </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statusList" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="requestReliefForm.get('status').hasError('required')">
+          Status Field is mandatory
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

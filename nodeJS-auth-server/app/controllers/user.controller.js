@@ -1,5 +1,6 @@
 const db = require('../models');
 const User = db.user;
+const RequestRelief = db.requestrelief;
 
 exports.allAccess = (req, res) => {
   res.status(200).send('Public Content.');
@@ -37,4 +38,32 @@ exports.getUser = (req, res) => {
         });
       }
     });
+};
+
+exports.saveRequestRelief = (reqest, response) => {
+  const reliefRequest = new RequestRelief({
+    state: reqest.body.state,
+    userId: reqest.body.userId,
+    district: reqest.body.district,
+    email: reqest.body.email,
+    typeOfCalamity: reqest.body.typeOfCalamity,
+    requirement: reqest.body.requirement,
+    severity: reqest.body.severity,
+    phoneNumber: reqest.body.phoneNumber,
+    expectedDelivery: reqest.body.expectedDelivery,
+    userIdMapped: reqest.body.userIdMapped,
+    status: reqest.body.status,
+  });
+
+  reliefRequest.save((err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    response.status(200).send({
+      id: data.id,
+      message: 'Relief Request Raised Successfully!',
+    });
+  });
 };

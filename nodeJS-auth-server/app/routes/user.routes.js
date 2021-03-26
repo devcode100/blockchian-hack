@@ -27,4 +27,10 @@ module.exports = function (app) {
   );
 
   app.get('/api/get/user/:id', [authJwt.verifyToken], controller.getUser);
+
+  app.post(
+    '/api/post/relief-request',
+    [authJwt.verifyToken],
+    controller.saveRequestRelief
+  );
 };

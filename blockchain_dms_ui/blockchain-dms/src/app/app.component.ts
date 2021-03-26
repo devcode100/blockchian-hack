@@ -18,9 +18,7 @@ export class AppComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar,
-    private _loadEthService: LoadEthService,
-    private _web3Service: Web3Service
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {

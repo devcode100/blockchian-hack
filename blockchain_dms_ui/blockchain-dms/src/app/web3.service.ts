@@ -10,9 +10,14 @@ const ngoRegContractABI = require("../deployed-smart-contract/NgoRegistration.js
 const userRegContractAddress = "0x550A9D621F0e9d5E15bAA14ACcbb1603f79450dd";
 const userRegContractABI = require("../deployed-smart-contract/UserRegistration.json");
 //-------------------
+const reliefRequestContractAddress =
+  "0x42e80eadC50cC88Ef55154448f55BB591e315143";
+const reliefRequestContractABI = require("../deployed-smart-contract/ReliefRequest.json");
+//-------------------
 let userMasterInstance = undefined;
 let ngoRegInstance = undefined;
 let userRegInstance = undefined;
+let reliefRequestInstance = undefined;
 let etherAccount;
 @Injectable({
   providedIn: "root",
@@ -35,6 +40,11 @@ export class Web3Service {
     userRegInstance = new window["web3"].eth.Contract(
       userRegContractABI.abi,
       userRegContractAddress
+    );
+    //-------------------
+    reliefRequestInstance = new window["web3"].eth.Contract(
+      reliefRequestContractABI.abi,
+      reliefRequestContractAddress
     );
     //-------------------
     this._loadEthService.getEthAccount().then(
@@ -112,6 +122,17 @@ export class Web3Service {
   updateIsRegisteredFlag(_id: string, isRegistered: boolean) {
     return userMasterInstance.methods
       .updateisRegisteredData(_id, isRegistered)
+      .send({ from: etherAccount[0] });
+  }
+
+  saveReliefRequest(
+    _requestId: string,
+    _userId: string,
+    _userMappedId: string,
+    _status: string
+  ) {
+    return reliefRequestInstance.methods
+      .saveReliefRequest(_requestId, _userId, _userMappedId, _status)
       .send({ from: etherAccount[0] });
   }
 }
