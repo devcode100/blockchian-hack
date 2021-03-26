@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="userRegisterForm" (ngSubmit)="registerUser()">
+      <h2>User Registration</h2>
+
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Name" formControlName="name" required />
+        <mat-error> Please provide a valid Name </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Age" formControlName="age" required />
+        <mat-error> Please provide a valid Age </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Email Address"
+          formControlName="email"
+          required
+        />
+        <mat-error> Please provide a valid Email Address </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="State" formControlName="state" required />
+        <mat-error> Please provide a valid state </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="District"
+          formControlName="district"
+          required
+        />
+        <mat-error> Please provide a valid district </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Date Of Birth</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dob"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error> Please provide a valid Date Of Birth</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+          required
+        />
+        <mat-error> Please provide a valid phoneNumber </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Profession"
+          formControlName="profession"
+          required
+        />
+        <mat-error> Please provide a valid profession </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

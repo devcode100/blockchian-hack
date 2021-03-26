@@ -1,0 +1,7 @@
+#home-bg-image {
+  display: block;
+  width: 100vw;
+  height: 93.5vh;
+  background: url("../../assets/bg-images/blockchain_dmr-1.jpg") no-repeat
+    center center fixed;
+}
