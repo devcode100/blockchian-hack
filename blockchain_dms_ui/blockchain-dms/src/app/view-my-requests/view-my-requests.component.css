@@ -1,0 +1,44 @@
+.block-headers-align .mat-expansion-panel-header-title {
+  flex-basis: 0;
+  position: relative;
+  top: 13px;
+}
+
+.block-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 20%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  flex: 1;
+  margin-left: 10px;
+}
+
+.column-reverse {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 15%;
+  flex: 1;
+}
+
+.vertical-align {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

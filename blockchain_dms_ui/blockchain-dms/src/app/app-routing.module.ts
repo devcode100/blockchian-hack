@@ -1,3 +1,4 @@
+import { ViewMyRequestsComponent } from "./view-my-requests/view-my-requests.component";
 import { ViewReliefRequestsComponent } from "./view-relief-requests/view-relief-requests.component";
 import { RequestReliefComponent } from "./request-relief/request-relief.component";
 import { UserRegistrationComponent } from "./user-registration/user-registration.component";
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: "view-relief-request",
     component: ViewReliefRequestsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "view-my-requests",
+    component: ViewMyRequestsComponent,
     canActivate: [AuthGuardService],
   },
 ];

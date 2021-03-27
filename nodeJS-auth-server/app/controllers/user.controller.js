@@ -97,3 +97,15 @@ exports.updateRequestStatus = (request, response) => {
     }
   );
 };
+
+exports.getMyRequests = (request, response) => {
+  const requestId = request.params.id;
+  RequestRelief.find({
+    $or: [{ userId: requestId }, { userIdMapped: requestId }],
+  }).exec(function (err, filteredData) {
+    if (err) {
+      response.status(500).send({ message: err });
+    }
+    response.status(200).send(filteredData);
+  });
+};

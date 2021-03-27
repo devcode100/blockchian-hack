@@ -100,6 +100,7 @@ export class ViewReliefRequestsComponent implements OnInit {
                   this._authService.userInfo.id
                 )
                 .then((data) => {
+                  this.updateReliefRequestObject(response);
                   this._snackBar.open(
                     "Response for helping with relief goods has been send for approval!",
                     "Close",
@@ -117,5 +118,13 @@ export class ViewReliefRequestsComponent implements OnInit {
           );
       }
     });
+  }
+
+  updateReliefRequestObject(response) {
+    let itemIndex = this.reliefRequestList.findIndex(
+      (item) => item._id == response._id
+    );
+    this.reliefRequestList[itemIndex].status = response.status;
+    this.reliefRequestList[itemIndex].userIdMapped = response.userIdMapped;
   }
 }

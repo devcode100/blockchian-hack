@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="helpReliefForm" (ngSubmit)="saveHelpReliefDatails()">
+      <h2>Help Relief Shipping Form</h2>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Relief Request Id"
+          formControlName="reliefRequestId"
+          required
+        />
+        <mat-error> Please provide a valid reliefRequestId </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Help User Id"
+          formControlName="helpUserId"
+          required
+        />
+        <mat-error> Please provide a valid helpUserId </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Relief Details"
+          formControlName="reliefDetails"
+          required
+        />
+        <mat-error> Please provide a valid Relief Details </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Local Address"
+          formControlName="localAddress"
+          required
+        />
+        <mat-error> Please provide a valid localAddress </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Relief Photo Proof"
+          formControlName="reliefPhotoHash"
+          required
+        />
+        <mat-error> Please provide a valid Relief Photo Proof </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Ship Relief Good</button>
+    </form>
+  </mat-card-content>
+</mat-card>

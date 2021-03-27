@@ -36,6 +36,10 @@ import { UserConfirmComponent } from "./modal-dialog/user-confirm/user-confirm.c
 import { RequestReliefComponent } from "./request-relief/request-relief.component";
 import { ViewReliefRequestsComponent } from "./view-relief-requests/view-relief-requests.component";
 import { RaiseHelpComponent } from './modal-dialog/raise-help/raise-help.component';
+import { ViewMyRequestsComponent } from './view-my-requests/view-my-requests.component';
+import { UserMasterComponent } from './modal-dialog/user-master/user-master.component';
+import { HelpShippingComponent } from './modal-dialog/help-shipping/help-shipping.component';
+import { ReliefReceivedComponent } from './modal-dialog/relief-received/relief-received.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +54,10 @@ import { RaiseHelpComponent } from './modal-dialog/raise-help/raise-help.compone
     RequestReliefComponent,
     ViewReliefRequestsComponent,
     RaiseHelpComponent,
+    ViewMyRequestsComponent,
+    UserMasterComponent,
+    HelpShippingComponent,
+    ReliefReceivedComponent,
   ],
   imports: [
     BrowserModule,

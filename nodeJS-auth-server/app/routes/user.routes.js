@@ -45,4 +45,10 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.updateRequestStatus
   );
+
+  app.get(
+    '/api/my/relief-requests/:id',
+    [authJwt.verifyToken],
+    controller.getMyRequests
+  );
 };

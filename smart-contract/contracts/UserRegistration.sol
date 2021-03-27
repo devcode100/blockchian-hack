@@ -38,4 +38,28 @@ contract UserRegistration {
 
         userMasterRegistrationIds.push(_userMasterId);
     }
+
+    function displayDetails(string memory _userMasterId)
+        public
+        view
+        returns (
+            string memory,
+            uint256,
+            string memory,
+            string memory,
+            string memory,
+            string memory,
+            string memory
+        )
+    {
+        return (
+            userMasterRegistrationList[_userMasterId].name,
+            userMasterRegistrationList[_userMasterId].age,
+            userMasterRegistrationList[_userMasterId].state,
+            userMasterRegistrationList[_userMasterId].district,
+            userMasterRegistrationList[_userMasterId].dob,
+            userMasterRegistrationList[_userMasterId].phoneNumber,
+            userMasterRegistrationList[_userMasterId].profession
+        );
+    }
 }

@@ -1,23 +1,27 @@
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { LoadEthService } from "./load-eth.service";
-const userMasterContractAddress = "0x0451E8362cA0CdaB3a9Fd728d0219C23a3d7E8b9";
+const userMasterContractAddress = "0xc92E92eC5C345522729F33533af42C8892E3D2f7";
 const userMasterContractABI = require("../deployed-smart-contract/UserMaster.json");
 //-------------------
-const ngoRegContractAddress = "0x56F9876682A2609165537b8697d1cf0dDf4dAbCb";
+const ngoRegContractAddress = "0x6198c99EaCBC058141d899b4B25E69Fd27157450";
 const ngoRegContractABI = require("../deployed-smart-contract/NgoRegistration.json");
 //-------------------
-const userRegContractAddress = "0x990f8C788B25D3e622bEEdc63A59B07738104Ea2";
+const userRegContractAddress = "0xF51229A4227d6A598EFE0E77793228137e66bf93";
 const userRegContractABI = require("../deployed-smart-contract/UserRegistration.json");
 //-------------------
 const reliefRequestContractAddress =
-  "0xca1475cC4c3eB7F915657386F50793dF8F50c4Fe";
+  "0xbb078865aa16A6efa8F9D823019b5679d8b7c2ff";
 const reliefRequestContractABI = require("../deployed-smart-contract/ReliefRequest.json");
+//-------------------
+const helperContractAddress = "0xE5c76C9a417B18f0858e3fB7D230B531f24fE2CE";
+const helperContractABI = require("../deployed-smart-contract/HelperContract.json");
 //-------------------
 let userMasterInstance = undefined;
 let ngoRegInstance = undefined;
 let userRegInstance = undefined;
 let reliefRequestInstance = undefined;
+let helperContractInstance = undefined;
 let etherAccount;
 @Injectable({
   providedIn: "root",
@@ -45,6 +49,11 @@ export class Web3Service {
     reliefRequestInstance = new window["web3"].eth.Contract(
       reliefRequestContractABI.abi,
       reliefRequestContractAddress
+    );
+    //-------------------
+    helperContractInstance = new window["web3"].eth.Contract(
+      helperContractABI.abi,
+      helperContractAddress
     );
     //-------------------
     this._loadEthService.getEthAccount().then(
@@ -147,6 +156,28 @@ export class Web3Service {
   ) {
     return reliefRequestInstance.methods
       .updateStatusAndMappedUser(_requestId, _newStatus, _mappedUserId)
+      .send({ from: etherAccount[0] });
+  }
+
+  displayUserMasterDetails(_userMasterid: string) {
+    return userRegInstance.methods.displayDetails(_userMasterid).call();
+  }
+
+  saveReliefHelperInfo(
+    _reliefRequestId: string,
+    _helpUserId: string,
+    _localAddress: string,
+    _reliefDetails: string,
+    _reliefPhotoHash: string
+  ) {
+    return helperContractInstance.methods
+      .saveReliefHelperInfo(
+        _reliefRequestId,
+        _helpUserId,
+        _localAddress,
+        _reliefDetails,
+        _reliefPhotoHash
+      )
       .send({ from: etherAccount[0] });
   }
 }

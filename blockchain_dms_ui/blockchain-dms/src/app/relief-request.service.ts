@@ -55,4 +55,15 @@ export class ReliefRequestService {
       }
     );
   }
+
+  getMyRequests(_requestId: string) {
+    return this._httpClient.get(
+      "http://localhost:8080/api/my/relief-requests/" + _requestId,
+      {
+        headers: new HttpHeaders({
+          "x-access-token": this._authService.getToken(),
+        }),
+      }
+    );
+  }
 }

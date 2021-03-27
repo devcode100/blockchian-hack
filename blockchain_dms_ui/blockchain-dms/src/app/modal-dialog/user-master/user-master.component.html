@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>User Master Data</h2>
+<mat-dialog-content class="mat-typography">
+  <p></p>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>Name:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[0] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>Age:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[1] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>State:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[2] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>District:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[3] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>DOB:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[4] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>Phone Number:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[5] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="some-page-wrapper">
+    <div class="row">
+      <div class="column-reverse">
+        <div class="blue-column"><strong>Profession:</strong></div>
+      </div>
+      <div class="column">
+        <div class="green-column">
+          {{ masterData[6] }}
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close
+    (click)="closeDialog(true)"
+  >
+    Close
+  </button>
+</mat-dialog-actions>
