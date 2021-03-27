@@ -42,6 +42,30 @@
         >
       </mat-form-field>
 
+      <mat-form-field>
+        <div class="myfilebrowser">
+          <mat-toolbar>
+            <!-- Readonly Input to show File names -->
+            <input matInput formControlName="releafFileName" readonly />
+
+            <!-- Browse Button -->
+            <button mat-flat-button color="primary">Browse</button>
+          </mat-toolbar>
+
+          <!-- Fetch selected filed on change -->
+          <input
+            type="file"
+            #UploadFileInput
+            id="fileUpload"
+            (change)="fileChangeEvent($event)"
+            name="fileUpload"
+          />
+        </div>
+        <mat-error>
+          Please provide a valid Received Goods Photo Proof</mat-error
+        >
+      </mat-form-field>
+
       <button mat-raised-button color="primary">
         <mat-icon>delivery_dining</mat-icon>
         Confirm Shippment Delivery

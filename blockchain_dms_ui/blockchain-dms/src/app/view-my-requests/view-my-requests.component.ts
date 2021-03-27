@@ -114,6 +114,10 @@ export class ViewMyRequestsComponent implements OnInit {
     );
     this.reliefRequestList[itemIndex].status = response.status;
     this.reliefRequestList[itemIndex].userIdMapped = response.userIdMapped;
+    this.reliefRequestList[itemIndex].helpGoodsPhotoHash =
+      response.helpGoodsPhotoHash;
+    this.reliefRequestList[itemIndex].receivedGoodsPhotoHash =
+      response.receivedGoodsPhotoHash;
   }
 
   initiateShipping(reliefRequest: ReliefRequest) {

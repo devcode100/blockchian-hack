@@ -39,14 +39,26 @@
         />
         <mat-error> Please provide a valid localAddress </mat-error>
       </mat-form-field>
-      <mat-form-field class="full-width-input">
-        <input
-          matInput
-          placeholder="Relief Photo Proof"
-          formControlName="reliefPhotoHash"
-          required
-        />
-        <mat-error> Please provide a valid Relief Photo Proof </mat-error>
+
+      <mat-form-field>
+        <div class="myfilebrowser">
+          <mat-toolbar>
+            <!-- Readonly Input to show File names -->
+            <input matInput formControlName="releafFileName" readonly />
+
+            <!-- Browse Button -->
+            <button mat-flat-button color="primary">Browse</button>
+          </mat-toolbar>
+
+          <!-- Fetch selected filed on change -->
+          <input
+            type="file"
+            #UploadFileInput
+            id="fileUpload"
+            (change)="fileChangeEvent($event)"
+            name="fileUpload"
+          />
+        </div>
       </mat-form-field>
 
       <button mat-raised-button color="primary">Ship Relief Good</button>

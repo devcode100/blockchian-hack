@@ -1,9 +1,15 @@
 import { ReliefRequest } from "./../../modal/ReliefRequest";
-import { Component, Inject, OnInit, Optional } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  Optional,
+  ViewChild,
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { AuthService } from "src/app/auth.service";
 import { ReliefRequestService } from "src/app/relief-request.service";
 import { Web3Service } from "src/app/web3.service";
 
@@ -14,6 +20,8 @@ import { Web3Service } from "src/app/web3.service";
 export class HelpShippingComponent implements OnInit {
   helpReliefForm: FormGroup;
   reliefData: ReliefRequest;
+  releafFileName = "Select File";
+  @ViewChild("UploadFileInput") uploadFileInput: ElementRef;
   constructor(
     private fb: FormBuilder,
     private _reliefRequestService: ReliefRequestService,
@@ -37,7 +45,8 @@ export class HelpShippingComponent implements OnInit {
       ],
       reliefDetails: ["", Validators.required],
       localAddress: ["", Validators.required],
-      reliefPhotoHash: ["", Validators.required],
+      reliefPhotoFile: [""],
+      releafFileName: ["", Validators.required],
     });
   }
 
@@ -47,49 +56,77 @@ export class HelpShippingComponent implements OnInit {
       helpUserId: this.helpReliefForm.get("helpUserId").value,
       reliefDetails: this.helpReliefForm.get("reliefDetails").value,
       localAddress: this.helpReliefForm.get("localAddress").value,
-      reliefPhotoHash: this.helpReliefForm.get("reliefPhotoHash").value,
+      reliefPhotoHash: this.helpReliefForm.get("releafFileName").value,
+      reliefPhotoFile: this.helpReliefForm.get("reliefPhotoFile").value,
     };
-
     this._reliefRequestService
-      .updateReliefStatusAndGoodPhotoHash(
-        helpReliefDetails.reliefRequestId,
-        "GOODS_SHIPPED",
-        helpReliefDetails.helpUserId,
-        helpReliefDetails.reliefPhotoHash
-      )
+      .uplaodFileToIpfs(helpReliefDetails.reliefPhotoFile)
       .subscribe(
-        (response) => {
-          this._web3Service
-            .updateStatusMappedHelperGoodsHash(
+        (ipfs: any) => {
+          this._reliefRequestService
+            .updateReliefStatusAndGoodPhotoHash(
               helpReliefDetails.reliefRequestId,
               "GOODS_SHIPPED",
               helpReliefDetails.helpUserId,
-              helpReliefDetails.reliefPhotoHash
+              ipfs[0].hash
             )
-            .then((data) => {
-              this._web3Service
-                .saveReliefHelperInfo(
-                  helpReliefDetails.reliefRequestId,
-                  helpReliefDetails.helpUserId,
-                  helpReliefDetails.reliefDetails,
-                  helpReliefDetails.localAddress,
-                  helpReliefDetails.reliefPhotoHash
-                )
-                .then(
-                  (finalData) => {
-                    this.dialogRef.close(response);
-                  },
-                  (error) => {
-                    this.dialogRef.close(null);
-                  }
-                );
-            });
+            .subscribe(
+              (response) => {
+                this._web3Service
+                  .updateStatusMappedHelperGoodsHash(
+                    helpReliefDetails.reliefRequestId,
+                    "GOODS_SHIPPED",
+                    helpReliefDetails.helpUserId,
+                    ipfs[0].hash
+                  )
+                  .then((data) => {
+                    this._web3Service
+                      .saveReliefHelperInfo(
+                        helpReliefDetails.reliefRequestId,
+                        helpReliefDetails.helpUserId,
+                        helpReliefDetails.reliefDetails,
+                        helpReliefDetails.localAddress,
+                        ipfs[0].hash
+                      )
+                      .then(
+                        (finalData) => {
+                          this.dialogRef.close(response);
+                        },
+                        (error) => {
+                          this.dialogRef.close(null);
+                        }
+                      );
+                  });
+              },
+              (error) => {
+                this._snackBar.open("Unexpected Error occured!", "Close", {
+                  duration: 4000,
+                });
+              }
+            );
         },
-        (error) => {
-          this._snackBar.open("Unexpected Error occured!", "Close", {
-            duration: 4000,
-          });
-        }
+        (error) => {}
       );
+  }
+
+  fileChangeEvent(fileInput: any) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      this.releafFileName = "";
+
+      Array.from(fileInput.target.files).forEach((file: File) => {
+        this.helpReliefForm.patchValue({
+          reliefPhotoFile: fileInput.target.files[0],
+        });
+        this.releafFileName += file.name;
+      });
+
+      // Reset File Input to Selct Same file again
+      this.uploadFileInput.nativeElement.value = "";
+    } else {
+      this.releafFileName = "Select File";
+    }
+    this.helpReliefForm.patchValue({
+      releafFileName: this.releafFileName,
+    });
   }
 }

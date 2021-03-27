@@ -117,4 +117,15 @@ export class ReliefRequestService {
       }
     );
   }
+
+  uplaodFileToIpfs(file: any) {
+    var formData: any = new FormData();
+    formData.append("file", file);
+
+    return this._httpClient.post("http://localhost:8080/api/upload/file", formData, {
+      headers: new HttpHeaders({
+        "x-access-token": this._authService.getToken(),
+      }),
+    });
+  }
 }

@@ -104,7 +104,7 @@ exports.updateRequestStatus = (request, response) => {
 
 exports.updateRequestStatusAndPhoto = (request, response) => {
   const requestId = request.params.id;
-  const updatedStatus = request.params.updatedStatus;
+  const updatedStatus = request.params.status;
   const userMappedId = request.params.mappedId;
   const helpPhotoHash = request.params.reliefPhotoHash;
 

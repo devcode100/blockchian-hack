@@ -177,6 +177,47 @@
         </div>
       </div>
     </div>
+
+    <div class="some-page-wrapper" *ngIf="reliefRequest.helpGoodsPhotoHash">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Shipping Photo ID:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.helpGoodsPhotoHash }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.receivedGoodsPhotoHash">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Good Photo ID:</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.receivedGoodsPhotoHash }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.notes">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Notes :</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.notes }}
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       class="row"
       *ngIf="
