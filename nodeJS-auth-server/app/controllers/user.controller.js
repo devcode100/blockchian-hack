@@ -190,7 +190,9 @@ exports.getileFromIPFS = (request, response) => {
       response.status(500).send({ message: err });
     }
 
-    response.status(200).send(file[0]);
+    response
+      .status(200)
+      .send({ image: Buffer.from(file[0].content).toString('base64') });
   });
 };
 
@@ -204,3 +206,8 @@ exports.uploadFile = (request, response) => {
     response.status(200).send(fileData);
   });
 };
+
+function toBase64(arr) {
+  //arr = new Uint8Array(arr) if it's an ArrayBuffer
+  return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ''));
+}

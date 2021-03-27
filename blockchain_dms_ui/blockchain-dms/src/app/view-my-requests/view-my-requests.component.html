@@ -204,6 +204,7 @@
         </div>
       </div>
     </div>
+
     <div class="some-page-wrapper" *ngIf="reliefRequest.notes">
       <div class="row">
         <div class="column-reverse">
@@ -277,7 +278,22 @@
         </div>
       </div>
     </div>
-
+    <p *ngIf="reliefRequest.helpGoodsPhotoHash">
+      <a
+        href="http://127.0.0.1:8081/ipfs/{{ reliefRequest.helpGoodsPhotoHash }}"
+        target="_blank"
+        >Proof of relief shipped</a
+      >
+    </p>
+    <p *ngIf="reliefRequest.receivedGoodsPhotoHash">
+      <a
+        href="http://127.0.0.1:8081/ipfs/{{
+          reliefRequest.receivedGoodsPhotoHash
+        }}"
+        target="_blank"
+        >Proof of relief received</a
+      >
+    </p>
     <mat-action-row>
       <button
         mat-raised-button

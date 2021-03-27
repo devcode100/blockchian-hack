@@ -67,7 +67,6 @@ module.exports = function (app) {
   app.get('/api/ipfs/save', [authJwt.verifyToken], controller.saveFileToIPFS);
   app.get(
     '/api/ipfs/get/:hash',
-    [authJwt.verifyToken],
     controller.getileFromIPFS
   );
 

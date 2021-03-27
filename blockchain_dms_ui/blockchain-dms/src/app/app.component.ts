@@ -1,9 +1,9 @@
+import { ReliefRequestService } from "src/app/relief-request.service";
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { LoadEthService } from "./load-eth.service";
-import { Web3Service } from "./web3.service";
 
 @Component({
   selector: "app-root",
@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
     private _loadEthService: LoadEthService,
     public authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _reliefRequestService: ReliefRequestService
   ) {}
 
   ngOnInit() {
