@@ -18,6 +18,7 @@ import { Web3Service } from "../web3.service";
 export class ViewMyRequestsComponent implements OnInit {
   reliefRequestList: ReliefRequest[];
   loggedInUserId: string;
+  showAccordion = true;
   @ViewChild("accordion", { static: true }) Accordion: MatAccordion;
   constructor(
     private _reliefRequestService: ReliefRequestService,
@@ -34,6 +35,11 @@ export class ViewMyRequestsComponent implements OnInit {
         (response: ReliefRequest[]) => {
           this.reliefRequestList = response;
           this.loggedInUserId = this._authService.userInfo.id;
+          if (!this.reliefRequestList || this.reliefRequestList.length == 0) {
+            this.showAccordion = false;
+          } else {
+            this.showAccordion = true;
+          }
         },
         (error) => {}
       );
@@ -118,6 +124,8 @@ export class ViewMyRequestsComponent implements OnInit {
       response.helpGoodsPhotoHash;
     this.reliefRequestList[itemIndex].receivedGoodsPhotoHash =
       response.receivedGoodsPhotoHash;
+    this.reliefRequestList[itemIndex].goodsReceivedDate =
+      response.goodsReceivedDate;
   }
 
   initiateShipping(reliefRequest: ReliefRequest) {

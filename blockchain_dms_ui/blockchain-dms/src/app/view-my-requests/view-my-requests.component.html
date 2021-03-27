@@ -1,5 +1,5 @@
 <mat-accordion
-  *ngIf="reliefRequestList && reliefRequestList.length > 0"
+  *ngIf="showAccordion"
   class="block-headers-align"
   [displayMode]="'default'"
   [multi]="true"
@@ -219,6 +219,20 @@
         </div>
       </div>
     </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.goodsReceivedDate">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Date :</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.goodsReceivedDate }}
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       class="row"
       *ngIf="
@@ -308,7 +322,7 @@
 
 <div
   class="vertical-align"
-  *ngIf="!reliefRequestList || reliefRequestList.length == 0"
+  *ngIf="!showAccordion"
 >
   <p>There are no relief requests in the system.</p>
   <p>

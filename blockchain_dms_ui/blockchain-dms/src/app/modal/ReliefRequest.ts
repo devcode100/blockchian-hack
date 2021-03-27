@@ -17,4 +17,5 @@ export interface ReliefRequest {
   notes: string;
   helpGoodsPhotoHash: string;
   receivedGoodsPhotoHash: string;
+  goodsReceivedDate: string;
 }

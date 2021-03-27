@@ -16,6 +16,7 @@ import { MatDialog } from "@angular/material/dialog";
 export class ViewReliefRequestsComponent implements OnInit {
   reliefRequestList: ReliefRequest[];
   loggedInUserId: string;
+  showAccordion = true;
   @ViewChild("accordion", { static: true }) Accordion: MatAccordion;
 
   constructor(
@@ -31,6 +32,11 @@ export class ViewReliefRequestsComponent implements OnInit {
       (response: ReliefRequest[]) => {
         this.reliefRequestList = response;
         this.loggedInUserId = this._authService.userInfo.id;
+        if (!this.reliefRequestList || this.reliefRequestList.length == 0) {
+          this.showAccordion = false;
+        } else {
+          this.showAccordion = true;
+        }
       },
       (error) => {}
     );
@@ -126,5 +132,11 @@ export class ViewReliefRequestsComponent implements OnInit {
     );
     this.reliefRequestList[itemIndex].status = response.status;
     this.reliefRequestList[itemIndex].userIdMapped = response.userIdMapped;
+    this.reliefRequestList[itemIndex].helpGoodsPhotoHash =
+      response.helpGoodsPhotoHash;
+    this.reliefRequestList[itemIndex].receivedGoodsPhotoHash =
+      response.receivedGoodsPhotoHash;
+    this.reliefRequestList[itemIndex].goodsReceivedDate =
+      response.goodsReceivedDate;
   }
 }

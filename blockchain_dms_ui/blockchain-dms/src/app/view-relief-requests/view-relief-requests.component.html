@@ -1,5 +1,5 @@
 <mat-accordion
-  *ngIf="reliefRequestList && reliefRequestList.length > 0"
+  *ngIf="showAccordion"
   class="block-headers-align"
   [displayMode]="'default'"
   [multi]="true"
@@ -168,6 +168,60 @@
         </div>
       </div>
     </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.helpGoodsPhotoHash">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column"><strong>Shipping Photo ID:</strong></div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.helpGoodsPhotoHash }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.receivedGoodsPhotoHash">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Good Photo ID:</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.receivedGoodsPhotoHash }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.notes">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Notes :</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.notes }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="some-page-wrapper" *ngIf="reliefRequest.goodsReceivedDate">
+      <div class="row">
+        <div class="column-reverse">
+          <div class="blue-column">
+            <strong>Received Date :</strong>
+          </div>
+        </div>
+        <div class="column">
+          <div class="green-column">
+            {{ reliefRequest.goodsReceivedDate }}
+          </div>
+        </div>
+      </div>
+    </div>
     <br />
     <div
       class="some-page-wrapper"
@@ -190,6 +244,22 @@
         </div>
       </div>
     </div>
+    <p *ngIf="reliefRequest.helpGoodsPhotoHash">
+      <a
+        href="http://127.0.0.1:8081/ipfs/{{ reliefRequest.helpGoodsPhotoHash }}"
+        target="_blank"
+        >Proof of relief shipped</a
+      >
+    </p>
+    <p *ngIf="reliefRequest.receivedGoodsPhotoHash">
+      <a
+        href="http://127.0.0.1:8081/ipfs/{{
+          reliefRequest.receivedGoodsPhotoHash
+        }}"
+        target="_blank"
+        >Proof of relief received</a
+      >
+    </p>
     <mat-action-row>
       <button
         mat-raised-button
@@ -202,10 +272,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<div
-  class="vertical-align"
-  *ngIf="!reliefRequestList || reliefRequestList.length == 0"
->
+<div class="vertical-align" *ngIf="!showAccordion">
   <p>There are no relief requests in the system.</p>
   <p>
     <button mat-raised-button color="accent" routerLink="/relief-request">
