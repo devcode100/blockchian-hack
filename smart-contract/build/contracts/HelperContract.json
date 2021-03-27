@@ -1628,12 +1628,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xE5c76C9a417B18f0858e3fB7D230B531f24fE2CE",
-      "transactionHash": "0x55bdbc7e4ce243e382d73c7c3948c6b7c26e9ebc04a29cf4d9314e3fc9c0c269"
+      "address": "0x40644ac444F9c309A21D11B25b0984903BE233e3",
+      "transactionHash": "0xb6b15f273cabd9e4e1d48cafad18462de75c289b6d4918f6e9d7021f43e264fb"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-27T04:49:09.922Z",
+  "updatedAt": "2021-03-27T06:40:40.280Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

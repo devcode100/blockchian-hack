@@ -1,1 +1,51 @@
-<p>relief-received works!</p>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="reliefReceivedForm" (ngSubmit)="confirmGoodsReceived()">
+      <h2>Help Relief Shipping Form</h2>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Relief Request Id"
+          formControlName="reliefRequestId"
+          required
+        />
+        <mat-error> Please provide a valid reliefRequestId </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Help User Id"
+          formControlName="helpUserId"
+          required
+        />
+        <mat-error> Please provide a valid helpUserId </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Receive Note"
+          formControlName="receiveNote"
+          required
+        />
+        <mat-error> Please provide a valid Receive Note </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Received Goods Photo Proof"
+          formControlName="receivedPhotoHash"
+          required
+        />
+        <mat-error>
+          Please provide a valid Received Goods Photo Proof</mat-error
+        >
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">
+        <mat-icon>delivery_dining</mat-icon>
+        Confirm Shippment Delivery
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

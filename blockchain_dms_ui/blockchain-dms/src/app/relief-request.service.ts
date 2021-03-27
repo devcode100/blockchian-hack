@@ -56,6 +56,57 @@ export class ReliefRequestService {
     );
   }
 
+  updateReliefStatusAndGoodPhotoHash(
+    _requestId: string,
+    newStatus: string,
+    mappedUserId: string,
+    reliefPhotoHash: string
+  ) {
+    return this._httpClient.put(
+      "http://localhost:8080/api/update/relief-requests-status-photo/" +
+        _requestId +
+        "/" +
+        newStatus +
+        "/" +
+        mappedUserId +
+        "/" +
+        reliefPhotoHash,
+      null,
+      {
+        headers: new HttpHeaders({
+          "x-access-token": this._authService.getToken(),
+        }),
+      }
+    );
+  }
+
+  updateReceivedStatusAndPhoto(
+    _requestId: string,
+    newStatus: string,
+    mappedUserId: string,
+    notes: string,
+    reliefReceivedPhotoHash: string,
+    goodsReceivedDate: string
+  ) {
+    return this._httpClient.put(
+      "http://localhost:8080/api/update/relief-received-status",
+
+      {
+        id: _requestId,
+        updatedStatus: newStatus,
+        userMappedId: mappedUserId,
+        notes: notes,
+        receivedGoodsPhotoHash: reliefReceivedPhotoHash,
+        goodsReceivedDate: goodsReceivedDate,
+      },
+      {
+        headers: new HttpHeaders({
+          "x-access-token": this._authService.getToken(),
+        }),
+      }
+    );
+  }
+
   getMyRequests(_requestId: string) {
     return this._httpClient.get(
       "http://localhost:8080/api/my/relief-requests/" + _requestId,

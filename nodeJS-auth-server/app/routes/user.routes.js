@@ -46,6 +46,18 @@ module.exports = function (app) {
     controller.updateRequestStatus
   );
 
+  app.put(
+    '/api/update/relief-requests-status-photo/:id/:status/:mappedId/:reliefPhotoHash',
+    [authJwt.verifyToken],
+    controller.updateRequestStatusAndPhoto
+  );
+
+  app.put(
+    '/api/update/relief-received-status',
+    [authJwt.verifyToken],
+    controller.updateReceivedStatusAndPhoto
+  );
+
   app.get(
     '/api/my/relief-requests/:id',
     [authJwt.verifyToken],

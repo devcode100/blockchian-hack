@@ -98,6 +98,60 @@ exports.updateRequestStatus = (request, response) => {
   );
 };
 
+exports.updateRequestStatusAndPhoto = (request, response) => {
+  const requestId = request.params.id;
+  const updatedStatus = request.params.updatedStatus;
+  const userMappedId = request.params.mappedId;
+  const helpPhotoHash = request.params.reliefPhotoHash;
+
+  RequestRelief.findByIdAndUpdate(
+    { _id: requestId },
+    {
+      $set: {
+        status: updatedStatus,
+        userIdMapped: userMappedId,
+        helpGoodsPhotoHash: helpPhotoHash,
+      },
+    },
+    { new: true },
+    function (err, updatedObject) {
+      if (err) {
+        response.status(500).send({ message: err });
+      }
+      response.status(200).send(updatedObject);
+    }
+  );
+};
+
+exports.updateReceivedStatusAndPhoto = (request, response) => {
+  const requestId = request.body.id;
+  const updatedStatus = request.body.updatedStatus;
+  const userMappedId = request.body.userMappedId;
+  const notes = request.body.notes;
+  const receivedGoodsPhotoHash = request.body.receivedGoodsPhotoHash;
+  const goodsReceivedDate = request.body.goodsReceivedDate;
+
+  RequestRelief.findByIdAndUpdate(
+    { _id: requestId },
+    {
+      $set: {
+        status: updatedStatus,
+        userIdMapped: userMappedId,
+        notes: notes,
+        receivedGoodsPhotoHash: receivedGoodsPhotoHash,
+        goodsReceivedDate: goodsReceivedDate,
+      },
+    },
+    { new: true },
+    function (err, updatedObject) {
+      if (err) {
+        response.status(500).send({ message: err });
+      }
+      response.status(200).send(updatedObject);
+    }
+  );
+};
+
 exports.getMyRequests = (request, response) => {
   const requestId = request.params.id;
   RequestRelief.find({

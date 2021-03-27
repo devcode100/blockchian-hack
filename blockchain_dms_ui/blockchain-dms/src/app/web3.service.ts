@@ -1,20 +1,20 @@
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { LoadEthService } from "./load-eth.service";
-const userMasterContractAddress = "0xc92E92eC5C345522729F33533af42C8892E3D2f7";
+const userMasterContractAddress = "0x91EF649f4FDF3d676B8B26d17DBffCe5AA20adE1";
 const userMasterContractABI = require("../deployed-smart-contract/UserMaster.json");
 //-------------------
-const ngoRegContractAddress = "0x6198c99EaCBC058141d899b4B25E69Fd27157450";
+const ngoRegContractAddress = "0xb6E47f653e8071E5810b9aD502c09ff72E67EEC0";
 const ngoRegContractABI = require("../deployed-smart-contract/NgoRegistration.json");
 //-------------------
-const userRegContractAddress = "0xF51229A4227d6A598EFE0E77793228137e66bf93";
+const userRegContractAddress = "0x7480C5F73265539b9bF441DEc42c4589AE9BB6Ed";
 const userRegContractABI = require("../deployed-smart-contract/UserRegistration.json");
 //-------------------
 const reliefRequestContractAddress =
-  "0xbb078865aa16A6efa8F9D823019b5679d8b7c2ff";
+  "0x31a4DF768E72b16b6d46581a8563f7Cba7f92c2e";
 const reliefRequestContractABI = require("../deployed-smart-contract/ReliefRequest.json");
 //-------------------
-const helperContractAddress = "0xE5c76C9a417B18f0858e3fB7D230B531f24fE2CE";
+const helperContractAddress = "0x40644ac444F9c309A21D11B25b0984903BE233e3";
 const helperContractABI = require("../deployed-smart-contract/HelperContract.json");
 //-------------------
 let userMasterInstance = undefined;
@@ -156,6 +156,40 @@ export class Web3Service {
   ) {
     return reliefRequestInstance.methods
       .updateStatusAndMappedUser(_requestId, _newStatus, _mappedUserId)
+      .send({ from: etherAccount[0] });
+  }
+
+  updateStatusMappedHelperGoodsHash(
+    _requestId: string,
+    _newStatus: string,
+    _mappedUserId: string,
+    _reliefPhotoHash: string
+  ) {
+    return reliefRequestInstance.methods
+      .updateStatusMappedHelperGoodsHash(
+        _requestId,
+        _newStatus,
+        _mappedUserId,
+        _reliefPhotoHash
+      )
+      .send({ from: etherAccount[0] });
+  }
+
+  updateStatusMappedReceiveGoodsHash(
+    _requestId: string,
+    _newStatus: string,
+    _mappedUserId: string,
+    _receivedPhotoHash: string,
+    _goodsReceivedDate: string
+  ) {
+    return reliefRequestInstance.methods
+      .updateStatusMappedReceiveGoodsHash(
+        _requestId,
+        _newStatus,
+        _mappedUserId,
+        _receivedPhotoHash,
+        _goodsReceivedDate
+      )
       .send({ from: etherAccount[0] });
   }
 

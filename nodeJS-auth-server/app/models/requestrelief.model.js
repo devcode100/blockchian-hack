@@ -17,6 +17,10 @@ const RequestRelief = mongoose.model(
     expectedDelivery: String,
     userIdMapped: String,
     status: String,
+    notes: String,
+    helpGoodsPhotoHash: String,
+    receivedGoodsPhotoHash: String,
+    goodsReceivedDate: String,
   })
 );
 

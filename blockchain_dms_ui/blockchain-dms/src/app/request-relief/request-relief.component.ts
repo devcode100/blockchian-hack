@@ -14,9 +14,20 @@ import { Router } from "@angular/router";
 })
 export class RequestReliefComponent implements OnInit {
   requestReliefForm: FormGroup;
-  statusList = ["INITIATED", "MAPPED", "APPROVED", "RECEIVED"];
-  severityList = ["HIGH", "LOW"];
-  currentReliefList = ["LAND SLIDE & FLOOD"];
+  statusList = [
+    "INITIATED",
+    "PENDING_APPROVAL",
+    "AWAITING_RELIEF_GOODS",
+    "GOODS_SHIPPED",
+    "RELIEF_RECEIVE_CONFIRMED",
+  ];
+  severityList = ["HIGH", "MEDIUM", "LOW"];
+  currentReliefList = [
+    "LAND SLIDE & FLOOD",
+    "CYCLONE",
+    "HEAVY RAIN",
+    "EARTHQUAKE",
+  ];
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,

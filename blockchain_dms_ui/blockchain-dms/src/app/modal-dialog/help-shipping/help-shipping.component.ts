@@ -51,18 +51,20 @@ export class HelpShippingComponent implements OnInit {
     };
 
     this._reliefRequestService
-      .updateReliefStatus(
+      .updateReliefStatusAndGoodPhotoHash(
         helpReliefDetails.reliefRequestId,
         "GOODS_SHIPPED",
-        helpReliefDetails.helpUserId
+        helpReliefDetails.helpUserId,
+        helpReliefDetails.reliefPhotoHash
       )
       .subscribe(
         (response) => {
           this._web3Service
-            .updateStatusAndMappedUser(
+            .updateStatusMappedHelperGoodsHash(
               helpReliefDetails.reliefRequestId,
               "GOODS_SHIPPED",
-              helpReliefDetails.helpUserId
+              helpReliefDetails.helpUserId,
+              helpReliefDetails.reliefPhotoHash
             )
             .then((data) => {
               this._web3Service

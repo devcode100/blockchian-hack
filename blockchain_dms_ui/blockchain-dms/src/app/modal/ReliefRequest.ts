@@ -14,4 +14,7 @@ export interface ReliefRequest {
   expectedDelivery: string;
   userIdMapped: string;
   status: string;
+  notes: string;
+  helpGoodsPhotoHash: string;
+  receivedGoodsPhotoHash: string;
 }

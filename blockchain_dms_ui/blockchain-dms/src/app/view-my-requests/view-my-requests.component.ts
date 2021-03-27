@@ -1,3 +1,4 @@
+import { ReliefReceivedComponent } from "./../modal-dialog/relief-received/relief-received.component";
 import { HelpShippingComponent } from "./../modal-dialog/help-shipping/help-shipping.component";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
@@ -144,5 +145,32 @@ export class ViewMyRequestsComponent implements OnInit {
     });
   }
 
-  confirmGoodsReceived(reliefRequest: ReliefRequest) {}
+  confirmGoodsReceived(reliefRequest: ReliefRequest) {
+    const dialogRef = this.dialog.open(ReliefReceivedComponent, {
+      height: "50vh",
+      width: "50vw",
+      data: { reliefRequest: reliefRequest },
+    });
+
+    dialogRef.afterClosed().subscribe((reliefData) => {
+      if (reliefData != null) {
+        this.updateReliefRequestObject(reliefData);
+        this._snackBar.open(
+          "Shipment is recieved and the relief request is completed.",
+          "Close",
+          {
+            duration: 4000,
+          }
+        );
+      } else {
+        this._snackBar.open(
+          "Unexpected error occured.Please contact administrator!",
+          "Close",
+          {
+            duration: 4000,
+          }
+        );
+      }
+    });
+  }
 }
