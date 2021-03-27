@@ -1,4 +1,8 @@
 const db = require('../models');
+const ipfsAPI = require('ipfs-api');
+const formidable = require('formidable');
+const readChunk = require('read-chunk');
+const fs = require('fs');
 const User = db.user;
 const RequestRelief = db.requestrelief;
 
@@ -161,5 +165,42 @@ exports.getMyRequests = (request, response) => {
       response.status(500).send({ message: err });
     }
     response.status(200).send(filteredData);
+  });
+};
+
+exports.saveFileToIPFS = (request, response) => {
+  const ipfs = ipfsAPI('localhost', '5001', { protocol: 'http' });
+  let testFile = fs.readFileSync(
+    'C:\\Users\\aruna\\Desktop\\Supply-Chain-Logistics.jpg'
+  );
+  let testBuffer = new Buffer.from(testFile);
+  ipfs.files.add(testBuffer, function (err, file) {
+    if (err) {
+      response.status(500).send({ message: err });
+    }
+    response.status(200).send(file);
+  });
+};
+
+exports.getileFromIPFS = (request, response) => {
+  const ipfs = ipfsAPI('localhost', '5001', { protocol: 'http' });
+  console.log('request.query.hash ', request.params.hash);
+  ipfs.files.get(request.params.hash, function (err, file) {
+    if (err) {
+      response.status(500).send({ message: err });
+    }
+
+    response.status(200).send(file[0]);
+  });
+};
+
+exports.uploadFile = (request, response) => {
+  const ipfs = ipfsAPI('localhost', '5001', { protocol: 'http' });
+  let bufferData = new Buffer.from(request.files.file.data);
+  ipfs.files.add(bufferData, function (err, fileData) {
+    if (err) {
+      response.status(500).send({ message: err });
+    }
+    response.status(200).send(fileData);
   });
 };

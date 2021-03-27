@@ -1,20 +1,20 @@
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { LoadEthService } from "./load-eth.service";
-const userMasterContractAddress = "0x91EF649f4FDF3d676B8B26d17DBffCe5AA20adE1";
+const userMasterContractAddress = "0x27E13E3D90b5392496A52A02dA0c560319b21161";
 const userMasterContractABI = require("../deployed-smart-contract/UserMaster.json");
 //-------------------
-const ngoRegContractAddress = "0xb6E47f653e8071E5810b9aD502c09ff72E67EEC0";
+const ngoRegContractAddress = "0x8375FEdE8B8e0C886aF54FF33f79D5E21D76cb7E";
 const ngoRegContractABI = require("../deployed-smart-contract/NgoRegistration.json");
 //-------------------
-const userRegContractAddress = "0x7480C5F73265539b9bF441DEc42c4589AE9BB6Ed";
+const userRegContractAddress = "0x4E4B3971a1Aa0a81520EE4AEa8D7c4dB73E4409f";
 const userRegContractABI = require("../deployed-smart-contract/UserRegistration.json");
 //-------------------
 const reliefRequestContractAddress =
-  "0x31a4DF768E72b16b6d46581a8563f7Cba7f92c2e";
+  "0x907FB50AE6E0cac68828d90814afef41F249385F";
 const reliefRequestContractABI = require("../deployed-smart-contract/ReliefRequest.json");
 //-------------------
-const helperContractAddress = "0x40644ac444F9c309A21D11B25b0984903BE233e3";
+const helperContractAddress = "0x38c455A33e9f547970f4D2c446a5194593467Ed2";
 const helperContractABI = require("../deployed-smart-contract/HelperContract.json");
 //-------------------
 let userMasterInstance = undefined;

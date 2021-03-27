@@ -1,5 +1,6 @@
 const { authJwt } = require('../middlewares');
 const controller = require('../controllers/user.controller');
+const fileUpload = require('express-fileupload');
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -9,7 +10,7 @@ module.exports = function (app) {
     );
     next();
   });
-
+  app.use(fileUpload());
   app.get('/api/test/all', controller.allAccess);
 
   app.get('/api/test/user', [authJwt.verifyToken], controller.userBoard);
@@ -63,4 +64,12 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.getMyRequests
   );
+  app.get('/api/ipfs/save', [authJwt.verifyToken], controller.saveFileToIPFS);
+  app.get(
+    '/api/ipfs/get/:hash',
+    [authJwt.verifyToken],
+    controller.getileFromIPFS
+  );
+
+  app.post('/api/upload/file', [authJwt.verifyToken], controller.uploadFile);
 };
